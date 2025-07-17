@@ -1,10 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace WorldStrands.Editor
+namespace worldStrands.editor
 {
-    [CustomEditor(typeof(WorldStrandProfile))]
-    public class WorldStrandProfileEditor : UnityEditor.Editor
+    [CustomEditor(typeof(worldStrandProfile))]
+    public class worldStrandProfileEditor : UnityEditor.Editor
     {
         SerializedProperty pointsProp;
 

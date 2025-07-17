@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WorldStrands
+namespace worldStrands
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-    public class WorldStrandPath : MonoBehaviour
+    public class worldStrandPath : MonoBehaviour
     {
-        public WorldStrandProfile profile;
+        public worldStrandProfile profile;
 
         public List<Vector3> points = new List<Vector3>
         {

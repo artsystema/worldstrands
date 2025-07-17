@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WorldStrands
+namespace worldStrands
 {
     [CreateAssetMenu(fileName = "WorldStrandProfile", menuName = "WorldStrands/Profile", order = 0)]
-    public class WorldStrandProfile : ScriptableObject
+    public class worldStrandProfile : ScriptableObject
     {
         [System.Serializable]
         public struct ProfilePoint

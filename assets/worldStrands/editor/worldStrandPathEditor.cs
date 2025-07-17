@@ -96,7 +96,16 @@ namespace worldStrands.editor
 
                 EditorGUI.BeginChangeCheck();
                 Handles.color = c;
-                Vector2 newPos = Handles.FreeMoveHandle(pos, Quaternion.identity, 4f, Vector2.zero, Handles.DotHandleCap);
+                // Use the 3D FreeMoveHandle variant to avoid a null reference
+                // exception that occurs with the 2D overload in some Unity
+                // versions when drawing inside the inspector.
+                Vector3 newPos3 = Handles.FreeMoveHandle(
+                    new Vector3(pos.x, pos.y, 0f),
+                    Quaternion.identity,
+                    4f,
+                    Vector3.zero,
+                    Handles.DotHandleCap);
+                Vector2 newPos = new Vector2(newPos3.x, newPos3.y);
                 if (EditorGUI.EndChangeCheck())
                 {
                     float newY = Mathf.Lerp(minY, maxY, Mathf.InverseLerp(rect.yMax, rect.yMin, newPos.y));

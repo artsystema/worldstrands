@@ -6,7 +6,20 @@ namespace worldStrands
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class worldStrandPath : MonoBehaviour
     {
-        public worldStrandProfile profile;
+        [System.Serializable]
+        public struct ProfilePoint
+        {
+            public float y;
+            public Color color;
+        }
+
+        public float profileScale = 1f;
+
+        public List<ProfilePoint> profile = new List<ProfilePoint>
+        {
+            new ProfilePoint { y = 0f, color = Color.white },
+            new ProfilePoint { y = -0.2f, color = Color.white }
+        };
 
         public List<Vector3> points = new List<Vector3>
         {
@@ -23,7 +36,7 @@ namespace worldStrands
 
         public void UpdateMesh()
         {
-            if (profile == null || points.Count < 2 || profile.points.Count < 2)
+            if (points.Count < 2 || profile.Count < 2)
             {
                 return;
             }
@@ -36,7 +49,7 @@ namespace worldStrands
             }
 
             int segments = points.Count;
-            int profileCount = profile.points.Count;
+            int profileCount = profile.Count;
 
             Vector3[] verts = new Vector3[segments * profileCount];
             Color[] cols = new Color[verts.Length];
@@ -46,8 +59,8 @@ namespace worldStrands
             {
                 for (int j = 0; j < profileCount; j++)
                 {
-                    var pp = profile.points[j];
-                    verts[i * profileCount + j] = points[i] + Vector3.up * pp.y;
+                    var pp = profile[j];
+                    verts[i * profileCount + j] = points[i] + Vector3.up * (pp.y * profileScale);
                     cols[i * profileCount + j] = pp.color;
                 }
             }

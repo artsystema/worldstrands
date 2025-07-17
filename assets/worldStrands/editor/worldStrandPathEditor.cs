@@ -7,10 +7,13 @@ namespace WorldStrands.Editor
     public class WorldStrandPathEditor : UnityEditor.Editor
     {
         SerializedProperty pointsProp;
+        SerializedProperty profileProp;
+        UnityEditor.Editor profileEditor;
 
         void OnEnable()
         {
             pointsProp = serializedObject.FindProperty("points");
+            profileProp = serializedObject.FindProperty("profile");
         }
 
         void OnSceneGUI()
@@ -37,7 +40,17 @@ namespace WorldStrands.Editor
         {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("profile"));
+            EditorGUILayout.PropertyField(profileProp);
+
+            if (profileProp.objectReferenceValue != null)
+            {
+                Editor.CreateCachedEditor(profileProp.objectReferenceValue, typeof(WorldStrandProfileEditor), ref profileEditor);
+                if (profileEditor != null)
+                {
+                    profileEditor.OnInspectorGUI();
+                }
+            }
+
             EditorGUILayout.PropertyField(pointsProp, true);
 
             if (GUILayout.Button("Update Mesh"))

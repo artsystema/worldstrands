@@ -1,10 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace WorldStrands.Editor
+namespace worldStrands.editor
 {
-    [CustomEditor(typeof(WorldStrandPath))]
-    public class WorldStrandPathEditor : UnityEditor.Editor
+    [CustomEditor(typeof(worldStrandPath))]
+    public class worldStrandPathEditor : UnityEditor.Editor
     {
         SerializedProperty pointsProp;
         SerializedProperty profileProp;
@@ -18,7 +18,7 @@ namespace WorldStrands.Editor
 
         void OnSceneGUI()
         {
-            WorldStrandPath path = (WorldStrandPath)target;
+            worldStrandPath path = (worldStrandPath)target;
 
             for (int i = 0; i < pointsProp.arraySize; i++)
             {
@@ -44,7 +44,7 @@ namespace WorldStrands.Editor
 
             if (profileProp.objectReferenceValue != null)
             {
-                Editor.CreateCachedEditor(profileProp.objectReferenceValue, typeof(WorldStrandProfileEditor), ref profileEditor);
+                Editor.CreateCachedEditor(profileProp.objectReferenceValue, typeof(worldStrandProfileEditor), ref profileEditor);
                 if (profileEditor != null)
                 {
                     profileEditor.OnInspectorGUI();
@@ -55,7 +55,7 @@ namespace WorldStrands.Editor
 
             if (GUILayout.Button("Update Mesh"))
             {
-                ((WorldStrandPath)target).UpdateMesh();
+                ((worldStrandPath)target).UpdateMesh();
             }
 
             serializedObject.ApplyModifiedProperties();
